@@ -83,7 +83,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, hgroup, menu, nav, section, main {
   display: block;
 }
 body {
@@ -105,7 +105,7 @@ table {
   border-spacing: 0;
 }
 
-header, footer, section {
+header, footer, section, main {
   display: block;
   position: relative;
 }
@@ -267,7 +267,7 @@ span.banner-fix {
   top: 19px;
 }
 
-section#main_content {
+main#main_content {
   z-index: 2;
   padding: 20px 82px 0;
   min-height:185px;
@@ -370,7 +370,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a, a:hover {
+a, a:hover, a:focus, a:active {
   color: #417090;
 }
 
@@ -378,7 +378,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover, a:focus, a:active {
   text-decoration: underline;
 }
 
