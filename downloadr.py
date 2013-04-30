@@ -7,7 +7,7 @@ from urllib2 import HTTPError, URLError, urlopen
 from multiprocessing.pool import ThreadPool
 import hashlib
 
-curdate = strftime("%Y%m%d%H%M%S", gmtime())
+curdate = "webdevdata.org-" + strftime("%Y-%m-%d-%H%M%S", gmtime())
 os.mkdir(curdate)
 os.chdir(curdate)
 pool = ThreadPool(processes = 64)
