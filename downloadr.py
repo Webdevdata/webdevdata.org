@@ -6,6 +6,7 @@ import sys
 from urllib2 import HTTPError, URLError, urlopen
 from multiprocessing.pool import ThreadPool
 import hashlib
+import magic
 
 curdate = "webdevdata.org-" + strftime("%Y-%m-%d-%H%M%S", gmtime())
 os.mkdir(curdate)
@@ -15,18 +16,26 @@ pool = ThreadPool(processes = 64)
 def downloadFile(url):
     url = url.strip()
     try: 
-        print "Downloading: ",  "http://" + url
+        print "Downloading: ", url
+        if url.startswith("http://"):
+            url = url[7:]
+        urlhost = url.split("/")[0]
+        urlpath = "/".join(url.split("/")[1:])
         f = urlopen("http://" + url)
         hash = hashlib.md5()
         hash.update(url)
         dir = hash.hexdigest()[:2]
-        print "dir", dir
         if not os.path.exists(dir):
             os.mkdir(dir)
-        with open(dir + "/" + url + ".html.txt", "wb") as local_file:
-            local_file.write(f.read())
+        buffer = f.read()
+        ext = magic.from_buffer(buffer).split()[0].lower()
+        if "html" in ext:
+            ext = "html.txt"
+        filename = dir + "/" + urlhost + "_" + hash.hexdigest() + "." + ext
+        with open(filename, "wb") as local_file:
+            local_file.write(buffer)
             local_file.close()
-        with open(dir + "/" + url + ".html.hdr.txt", "wb") as local_file:
+        with open(filename + ".hdr.txt", "wb") as local_file:
             local_file.write(str(f.getcode()) + "\n" + str(f.info()))
             local_file.close()
     except HTTPError, e:
