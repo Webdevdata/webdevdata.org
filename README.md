@@ -3,7 +3,7 @@
 This branch contains the scripts used to fetch the HTML files from top
 Alexa sites.
 
-## Metodology
+## Methodology
 
 * The top 1 million Alexa sites
 [csv](http://s3.amazonaws.com/alexa-static/top-1m.csv.zip) is
