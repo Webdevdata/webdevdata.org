@@ -18,11 +18,15 @@ good to go.
 If you're on Windows, [cygwin](http://www.cygwin.com/) may be your best
 bet.
 
+If you want to fetch resources other than Alexa's top HTMLs, you can do
+that by doing something like `cat resource_urls.txt | ./downloadr.py`
+
 ## Dependencies
 
 * Python (Tested with 2.7)
 * curl
 * zcat
+* [python-magic](https://github.com/ahupp/python-magic)
 
 ## Results 
 
@@ -34,5 +38,4 @@ verify there are not toom many files in a single directory.
 
 The resulting files have an ".html.txt" extension for the data files and
 ".html.hdr.txt" extension for the header files.
-
 
