@@ -4,16 +4,16 @@ import os
 from time import gmtime, strftime
 import sys
 from urllib2 import HTTPError, URLError, urlopen
-from multiprocessing.pool import ThreadPool
 import hashlib
 import magic
 
-curdate = "webdevdata.org-" + strftime("%Y-%m-%d-%H%M%S", gmtime())
-os.mkdir(curdate)
-os.chdir(curdate)
-pool = ThreadPool(processes = 64)
+def createDir():
+    dirname = "webdevdata.org-" + strftime("%Y-%m-%d-%H%M%S", gmtime())
+    os.mkdir(dirname)
+    return dirname
 
-def downloadFile(url):
+def downloadFile(url, dir):
+    os.chdir(dir)
     url = url.strip()
     try: 
         print "Downloading: ", url
@@ -43,8 +43,17 @@ def downloadFile(url):
     except URLError, e:
         print "URLError:", e.reason, url
 
-for url in sys.stdin.xreadlines():
-    pool.map_async(downloadFile, [url, ])
-
-pool.close()
-pool.join()
+if __name__=="__main__":
+    if len(sys.argv) < 2:
+        print >>sys.stderr, "Usage:", sys.argv[0], "create|download", "<URL>", "<dir>"
+        quit()
+    command = sys.argv[1]
+    if command == "create":
+        print createDir()
+    elif command == "download":
+        if len(sys.argv) < 4:
+            print >>sys.stderr, "Where's the URL and the directory?"
+            quit()
+        downloadFile(sys.argv[2], sys.argv[3])
+    else:
+        print >>sys.stderr, "Didn't understand the command", command
