@@ -37,5 +37,5 @@ The resulting directory structure is:
 verify there are not toom many files in a single directory. 
 
 The resulting files have an ".html.txt" extension for the data files and
-".html.hdr.txt" extension for the header files.
+".html.txt.hdr.txt" extension for the header files.
 
