@@ -1,4 +1,4 @@
-package org.opens.webdevdataextractor;
+package org.opens.webdevdataquery;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,9 +69,9 @@ public class QueryStatisticsEntity {
         
         sb.append("CSS Query : ").append(this.query)
                 .append(this.separator)
-                .append("Total # instances : ").append(this.totalInstanceCount)
+                .append("Total number of instances : ").append(this.totalInstanceCount)
                 .append(this.separator)
-                .append("Total # pages with feature : ").append(this.pageWithFeatureCount)
+                .append("Total number of pages with feature : ").append(this.pageWithFeatureCount)
                 .append(this.separator);
         
         if (withUrls && !this.instanceCountByUrlMap.isEmpty()) {
@@ -103,5 +103,21 @@ public class QueryStatisticsEntity {
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public long getTotalInstanceCount() {
+        return totalInstanceCount;
+    }
+
+    public void setTotalInstanceCount(long totalInstanceCount) {
+        this.totalInstanceCount = totalInstanceCount;
+    }
+
+    public long getPageWithFeatureCount() {
+        return pageWithFeatureCount;
+    }
+
+    public void setPageWithFeatureCount(long pageWithFeatureCount) {
+        this.pageWithFeatureCount = pageWithFeatureCount;
     }
 }

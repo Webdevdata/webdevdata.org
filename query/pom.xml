@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.opens</groupId>
-  <artifactId>WebDevDataExtractor</artifactId>
+  <artifactId>webdevdata-query</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>WebDevDataExtractor</name>
+  <name>webdevdata-query</name>
   <url>http://maven.apache.org</url>
 
   <properties>

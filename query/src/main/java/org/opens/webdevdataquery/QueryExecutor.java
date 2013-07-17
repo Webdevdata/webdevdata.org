@@ -1,4 +1,4 @@
-package org.opens.webdevdataextractor;
+package org.opens.webdevdataquery;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,18 +16,23 @@ import org.jsoup.select.Elements;
  *
  * @author opens
  */
-public class HtmlCounter {
+public class QueryExecutor {
     
     public static final String statSeparator = "------------------------------------------------------";
     
     public static void printManual(String message) {
         if (message != null ) {
-            System.out.println(message);
+            System.out.println("\n" + message);
         }
         
-        System.out.println("\nUsage :\n\t[--withURIs] <webDevDataDirPath> <CSSQuery1> [<CSSQuery2> ... <CSSQueryN>]");
-        System.out.println("\n--withURIs :\n\talso display the list of URIs where instances matching css queries were found");
-        System.out.println("\n<webDevDataDirPath> :\n\ti.e /pathto/webdevdata/webdevdata.org-2013-06-18-124603/");
+        System.out.println("\nUsage :\n\twebdevdata-query.sh [--withUris] <webDevDataDirPath> <CSSLikeQuery1> [<CSSLikeQuery2> ... <CSSLikeQueryN>]");
+        System.out.println("\nParameters :");
+        System.out.println("\t<webDevDataDirPath>\n\t\tpath to webdevdata files : /pathto/webdevdata/webdevdata.org-<datetime>/");
+        System.out.println("\n\t<CSSLikeQuery>\n\t\t See http://jsoup.org/apidocs/org/jsoup/select/Selector.html selector syntax section");
+        System.out.println("\n\t--withUris\n\t\tAlso display the list of URIs where instances matching css queries were found");
+        System.out.println("\nExamples :");
+        System.out.println("\twebdevdata-query.sh /home/john/webdevdata/webdevdata.org-2013-06-18-124603/ footer");
+        System.out.println("\twebdevdata-query.sh --withUris /home/john/webdevdata/webdevdata.org-2013-06-18-124603/ a img:not([alt]) nav header article\n");
         System.exit(0);
     }
     
@@ -68,13 +73,13 @@ public class HtmlCounter {
      */
     public static void main(String[] args) throws Exception {
         String webDevDataPath = null;    
-        boolean withURIs = false;
+        boolean withUris = false;
         int argsStartIndex = 0;
         
         // Handling command line arguments
         try {
-            if (args[0].equals("--withURIs")) {
-                withURIs = true;
+            if (args[0].equals("--withUris")) {
+                withUris = true;
                 argsStartIndex = 1;
             } 
         } catch (Exception e) {
@@ -109,7 +114,7 @@ public class HtmlCounter {
         String[] extension = {"html.txt"};
         Iterator<File> iter =
                 FileUtils.iterateFiles(new File(webDevDataPath), extension, true);
-
+        
         // Iterate recursively over the web dev data folder
         while (iter.hasNext()) {
 
@@ -124,14 +129,14 @@ public class HtmlCounter {
                 int instanceCount = elements.size();
                 
                 if (instanceCount > 0) {
-                    queryStatistics.put(file.getName(), instanceCount);
+                    queryStatistics.put(file.getAbsolutePath(), instanceCount);
                 }
             }
         }
         
         long endTime = Calendar.getInstance().getTimeInMillis();
         
-        printQueryStatisticsList(queryStatisticsList, withURIs);
+        printQueryStatisticsList(queryStatisticsList, withUris);
         printParsingTime(startTime, endTime);
     }
 }
