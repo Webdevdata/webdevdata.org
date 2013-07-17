@@ -46,4 +46,4 @@ Some HTML element and attribute <a href="https://docs.google.com/spreadsheet/ccc
 ## Queries
 A java based script is available to get statistics on html tags/attributes with CSS Like queries.
 
-See the [Queries on WebDevData](https://github.com/baptistelebail/webdevdata.org/wiki) wiki.
+See the [Queries on WebDevData](https://github.com/baptistelebail/webdevdata.org/wiki/Queries-on-WebDevData) wiki.
