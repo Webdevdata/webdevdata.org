@@ -14,7 +14,9 @@ import org.jsoup.select.Elements;
 
 /**
  *
- * @author opens
+ * Company : Open-S
+ * @author Baptiste Le Bail
+ * 
  */
 public class QueryExecutor {
     
@@ -111,9 +113,8 @@ public class QueryExecutor {
         
         List<QueryStatisticsEntity> queryStatisticsList = getQueryStatisticsList(args, argsStartIndex);
         
-        String[] extension = {"html.txt"};
         Iterator<File> iter =
-                FileUtils.iterateFiles(new File(webDevDataPath), extension, true);
+                FileUtils.iterateFiles(new File(webDevDataPath), null, true);
         
         // Iterate recursively over the web dev data folder
         while (iter.hasNext()) {

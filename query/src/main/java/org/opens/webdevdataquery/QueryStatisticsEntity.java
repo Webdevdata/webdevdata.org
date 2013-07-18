@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author opens
+ * Company : Open-S
+ * @author Baptiste Le Bail
  */
 public class QueryStatisticsEntity {
     private final String separator = "\n";
