@@ -20,7 +20,8 @@ import org.jsoup.select.Elements;
  */
 public class QueryExecutor {
     
-    public static final String statSeparator = "------------------------------------------------------";
+    public static final String statSeparator = "\n";
+    public static final String statWithUrisSeparator = "------------------------------------------------------\n";
     
     public static void printManual(String message) {
         if (message != null ) {
@@ -61,12 +62,18 @@ public class QueryExecutor {
         return queryStatisticsList;
     }
     
-    public static void printQueryStatisticsList(List<QueryStatisticsEntity> queryStatisticsList, boolean withUrls) {
-        System.out.println(statSeparator);
+    public static void printQueryStatisticsList(List<QueryStatisticsEntity> queryStatisticsList, boolean withUris) {
+        String separator = (withUris ? statWithUrisSeparator : statSeparator);
+        
+        System.out.println(separator);
+        
+        if (!withUris) {
+            System.out.print("CSS Query;Total number of instances;Total number of pages with feature;Max number of instances per page\n");
+        }
         
         for (QueryStatisticsEntity queryStatistics : queryStatisticsList) {
-                System.out.print(queryStatistics.toString(withUrls));
-                System.out.println(statSeparator);
+                System.out.print(queryStatistics.toString(withUris));
+                System.out.print(separator);
         }
     }
     
@@ -115,7 +122,7 @@ public class QueryExecutor {
         
         Iterator<File> iter =
                 FileUtils.iterateFiles(new File(webDevDataPath), null, true);
-        
+         
         // Iterate recursively over the web dev data folder
         while (iter.hasNext()) {
 
@@ -137,6 +144,7 @@ public class QueryExecutor {
         
         long endTime = Calendar.getInstance().getTimeInMillis();
         
+        // print query results and parsing time
         printQueryStatisticsList(queryStatisticsList, withUris);
         printParsingTime(startTime, endTime);
     }

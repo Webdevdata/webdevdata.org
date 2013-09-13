@@ -12,10 +12,6 @@ import java.util.Map;
  * @author Baptiste Le Bail
  */
 public class QueryStatisticsEntity {
-    private final String separator = "\n";
-    private final String urlSeparator = "\n";
-    private final String instanceCountAndUrlSeparator = "\t";
-
     private Map<String, Integer> instanceCountByUrlMap;
     
     private String query;
@@ -64,30 +60,50 @@ public class QueryStatisticsEntity {
         this.pageWithFeatureCount++;
     }
             
-    public String toString(boolean withUrls) {
+    public String toString(boolean withUris) {
         StringBuilder sb = new StringBuilder();
         
-        sb.append("CSS Query : ").append(this.query)
-                .append(this.separator)
-                .append("Total number of instances : ").append(this.totalInstanceCount)
-                .append(this.separator)
-                .append("Total number of pages with feature : ").append(this.pageWithFeatureCount)
-                .append(this.separator);
-        
-        if (withUrls && !this.instanceCountByUrlMap.isEmpty()) {
-            List<Map.Entry<String, Integer>> sortedEntriesList = this.getSortedMapEntriesList(Order.DESC);
-            
-            sb.append(this.separator)
-                    .append("Instances")
-                    .append(this.instanceCountAndUrlSeparator)
-                    .append("URI")
-                    .append(this.separator);
-            
-            for (Map.Entry<String, Integer> entry : sortedEntriesList) {
-                sb.append(entry.getValue())
-                        .append(this.instanceCountAndUrlSeparator)
-                        .append(entry.getKey())
-                        .append(this.urlSeparator);
+        if (withUris) {
+            sb.append("CSS Query : ").append(this.query)
+                    .append("\n")
+                    .append("Total number of instances : ").append(this.totalInstanceCount)
+                    .append("\n")
+                    .append("Total number of pages with feature : ").append(this.pageWithFeatureCount)
+                    .append("\n");
+
+            if (!this.instanceCountByUrlMap.isEmpty()) {
+                List<Map.Entry<String, Integer>> sortedEntriesList = this.getSortedMapEntriesList(Order.DESC);
+                sb.append("Max number of instances per page : ");
+                for (Map.Entry<String, Integer> entry : sortedEntriesList) {
+                    sb.append(entry.getValue());
+                    break;
+                }
+                sb.append("\n");
+                
+                sb.append("\n")
+                        .append("Instances")
+                        .append("\t")
+                        .append("URI")
+                        .append("\n");
+
+                for (Map.Entry<String, Integer> entry : sortedEntriesList) {
+                    sb.append(entry.getValue())
+                            .append("\t")
+                            .append(entry.getKey())
+                            .append("\n");
+                }
+            }
+        } else {
+            sb.append(this.query).append(";");
+            sb.append(this.totalInstanceCount).append(";");
+            sb.append(this.pageWithFeatureCount).append(";");
+
+            if (!this.instanceCountByUrlMap.isEmpty()) {
+                List<Map.Entry<String, Integer>> sortedEntriesList = this.getSortedMapEntriesList(Order.DESC);
+                for (Map.Entry<String, Integer> entry : sortedEntriesList) {
+                    sb.append(entry.getValue());
+                    break;
+                }
             }
         }
         
