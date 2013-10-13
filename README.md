@@ -42,3 +42,8 @@ The resulting files have an ".html.txt" extension for the data files and
 ## <a href="http://www.html5accessibility.com/HTMLdata/webdevdata.org-2013-06-18.7z">June 2013 data set (484 Mb, .7z file)</a> 
 Includes approx 53,000 HTML files.
 Some HTML element and attribute <a href="https://docs.google.com/spreadsheet/ccc?key=0AlVP5_A996c5dFhMQ3R2SG1uZFNZVEsxUURQN213VVE#gid=0">usage stats</a> derived from the data are available.
+
+## Queries
+A java based script is available to get statistics on html tags/attributes with CSS-like queries.
+
+See the [Queries on WebDevData](https://github.com/baptistelebail/webdevdata.org/wiki/Queries-on-WebDevData) wiki.
