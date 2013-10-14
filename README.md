@@ -37,7 +37,7 @@ The resulting directory structure is:
 verify there are not toom many files in a single directory. 
 
 The resulting files have an ".html.txt" extension for the data files and
-".html.hdr.txt" extension for the header files.
+".html.txt.hdr.txt" extension for the header files.
 
 ## <a href="http://www.html5accessibility.com/HTMLdata/webdevdata.org-2013-06-18.7z">June 2013 data set (484 Mb, .7z file)</a> 
 Includes approx 53,000 HTML files.
