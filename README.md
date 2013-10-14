@@ -1,4 +1,4 @@
-[webdevdata.org](http://ebdevdata.org)
+[webdevdata.org](http://webdevdata.org)
 ==============
 
 Website for the group. 
